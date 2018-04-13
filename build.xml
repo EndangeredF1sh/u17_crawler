@@ -2,7 +2,7 @@
 <project name="u17_crawler" default="all">
   
   
-  <property file="u17_crawler.properties"/>
+  <property file="build.properties"/>
   <!-- Uncomment the following property if no tests compilation is needed -->
   <!-- 
   <property name="skip.tests" value="true"/>
@@ -188,7 +188,89 @@
   
   <!-- Modules -->
   
-  <import file="${basedir}/module_u17_crawler.xml"/>
+  
+  <!-- Module u17_crawler -->
+  
+  <dirname property="module.u17_crawler.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.u17_crawler" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.u17_crawler" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.u17_crawler" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.u17_crawler" value="-encoding UTF-8 -source 10 -target 10 ${compiler.args}"/>
+  
+  <property name="u17_crawler.output.dir" value="${module.u17_crawler.basedir}/out/production/u17_crawler"/>
+  <property name="u17_crawler.testoutput.dir" value="${module.u17_crawler.basedir}/out/test/u17_crawler"/>
+  
+  <path id="u17_crawler.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="u17_crawler.module.production.classpath">
+    <path refid="${module.jdk.classpath.u17_crawler}"/>
+    <path refid="library.jar.classpath"/>
+  </path>
+  
+  <path id="u17_crawler.runtime.production.module.classpath">
+    <pathelement location="${u17_crawler.output.dir}"/>
+    <path refid="library.jar.classpath"/>
+  </path>
+  
+  <path id="u17_crawler.module.classpath">
+    <path refid="${module.jdk.classpath.u17_crawler}"/>
+    <pathelement location="${u17_crawler.output.dir}"/>
+    <path refid="library.jar.classpath"/>
+  </path>
+  
+  <path id="u17_crawler.runtime.module.classpath">
+    <pathelement location="${u17_crawler.testoutput.dir}"/>
+    <pathelement location="${u17_crawler.output.dir}"/>
+    <path refid="library.jar.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.u17_crawler">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.u17_crawler">
+    <patternset refid="excluded.from.module.u17_crawler"/>
+  </patternset>
+  
+  <path id="u17_crawler.module.sourcepath">
+    <dirset dir="${module.u17_crawler.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.u17_crawler" depends="compile.module.u17_crawler.production,compile.module.u17_crawler.tests" description="Compile module u17_crawler"/>
+  
+  <target name="compile.module.u17_crawler.production" depends="register.custom.compilers" description="Compile module u17_crawler; production classes">
+    <mkdir dir="${u17_crawler.output.dir}"/>
+    <javac2 destdir="${u17_crawler.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.u17_crawler}/javac">
+      <compilerarg line="${compiler.args.u17_crawler}"/>
+      <bootclasspath refid="u17_crawler.module.bootclasspath"/>
+      <classpath refid="u17_crawler.module.production.classpath"/>
+      <src refid="u17_crawler.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.u17_crawler"/>
+    </javac2>
+    
+    <copy todir="${u17_crawler.output.dir}">
+      <fileset dir="${module.u17_crawler.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.u17_crawler.tests" depends="register.custom.compilers,compile.module.u17_crawler.production" description="compile module u17_crawler; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.u17_crawler" description="cleanup module">
+    <delete dir="${u17_crawler.output.dir}"/>
+    <delete dir="${u17_crawler.testoutput.dir}"/>
+  </target>
   
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
