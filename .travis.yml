@@ -1,1 +1,6 @@
 language: java
+script: true
+jdk:
+  - oraclejdk8
+  - oraclejdk9
+  - openjdk7
