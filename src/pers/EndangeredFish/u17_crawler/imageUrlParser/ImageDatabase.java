@@ -42,7 +42,7 @@ class ImageDatabase extends IdDatabase{
                         "`url` varchar(255) NOT NULL DEFAULT '',PRIMARY KEY " +
                         "(`image_id`)) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
                 res = statement.executeUpdate(sql);// executeUpdate语句会返回一个受影响的行数，如果返回-1就没有成功
-                if(res != -1) System.out.println("[imageDatabase】imageDatabase数据表创建成功");
+                if(res != -1) System.out.println("【imageDatabase】imageDatabase数据表创建成功");
             }
             else{
                 System.out.println("【imageDatabase】imageDatabase数据表已存在");

@@ -38,8 +38,10 @@ public class IdDatabase {
      * 为保证中文显示正常，需指定useUnicode=true 和 characterEncoding=UTF8
      * 执行数据库操作前应现在MySQL数据库中创建名为'comicDatabase'的数据库
      */
+    protected static final String username = "root";
+    protected static final String password = "root";
     protected static final String url = "jdbc:mysql://localhost:3306/comicDatabase?"
-            + "user=root&password=root&useUnicode=true&characterEncoding=UTF8&useSSL=true";
+            + "user="+username+"&password="+password+"&useUnicode=true&characterEncoding=UTF8&useSSL=true";
     protected boolean existFlag = false;
     /**
      * 连接数据库，若表不存在则创建comicDatabase表
