@@ -9,7 +9,7 @@ u17_crawler
 一个由Java编写的,针对u17.com（有妖气原创漫画梦工厂）上的免费漫画所编写的爬虫程序
 
 [项目地址](https://github.com/EndangeredF1sh/u17_crawler) | 
-[文档手册](http://github.endangeredf1sh.cn/JavaDoc/)
+[文档手册](https://EndangeredF1sh.github.io/JavaDoc/)
 
 依赖
 -----------------
